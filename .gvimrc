@@ -1,0 +1,1 @@
+/home/apoh/.vim/gvimrc
