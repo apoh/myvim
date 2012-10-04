@@ -15,14 +15,19 @@ filetype on
 
 colorscheme desert
 
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+
 let g:syntastic_enable_phpcs=0
-function! SwitchPHPCss()
-    if g:syntastic_enable_phpcs==0
-        let g:syntastic_enable_phpcs=1
-    else
-        let g:syntastic_enable_phpcs=0
-    endif
-endfunction
+""function! SwitchPHPCss()
+""    if g:syntastic_enable_phpcs==0
+""        let g:syntastic_enable_phpcs=1
+""    else
+""        let g:syntastic_enable_phpcs=0
+""    endif
+""endfunction
 
 
 let mapleader = ","
@@ -30,11 +35,10 @@ nmap <leader>g :Grep -nR <cword> .<CR>
 nmap <leader>fg :Grep -nR function.*<cword> .<CR>
 nmap <leader>l :FufFile **/<CR>
 nmap <leader>fb :FufBuffer <CR>
-nmap <leader>vd :VCSVimDiff <CR>
-nmap <leader>vb :VCSBlame <CR>
-nmap <leader>vl :VCSLog --graph --pretty=format:'%h - %d %s (%cr) <%an>' --abbrev-commit --date=relative<CR>
-nmap <leader>pd :call PhpDocSingle() <cr>
-nmap <leader>ec :call SwitchPHPCss() <cr>
+nmap <leader>vd :Gvdiff <CR>
+nmap <leader>vb :Gblame <CR>
+nmap <leader>vl :Glog<CR>
+""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
 
 
