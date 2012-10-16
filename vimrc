@@ -62,8 +62,6 @@ command! -nargs=1 RekGrep :Grep -nR <args> .
 
 syntax on
 
-imap <C-o> ^:set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
-
 " <C-x-o> is magic :)
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -106,8 +104,6 @@ set statusline+=%*
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
-
-imap <C-o> ^:set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
 
 """ onlye with syntastic
 function! CheckPHPCsCss()
@@ -189,4 +185,6 @@ noremap <leader>rr :RopeRename<CR>
 vnoremap <leader>rm :RopeExtractMethod<CR>
 noremap <leader>roi :RopeOrganizeImports<CR>
 noremap <leader>rai :RopeAutoImport
+
+noremap <leader>nt :NERDTreeToggle<CR>
 

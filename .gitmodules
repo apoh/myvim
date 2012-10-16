@@ -19,9 +19,6 @@
 [submodule "bundle/python-mode"]
 	path = bundle/python-mode
 	url = git://github.com/klen/python-mode.git
-[submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/zencoding-vim"]
 	path = bundle/zencoding-vim
 	url = http://github.com/mattn/zencoding-vim.git
