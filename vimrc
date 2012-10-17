@@ -20,16 +20,6 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 
-let g:syntastic_enable_phpcs=0
-""function! SwitchPHPCss()
-""    if g:syntastic_enable_phpcs==0
-""        let g:syntastic_enable_phpcs=1
-""    else
-""        let g:syntastic_enable_phpcs=0
-""    endif
-""endfunction
-
-
 let mapleader = ","
 nmap <leader>g :Grep -nR <cword> .<CR>
 nmap <leader>fg :Grep -nR function.*<cword> .<CR>
@@ -104,6 +94,9 @@ set statusline+=%*
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=0
+let g:syntastic_enable_phpcs=0
+let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
+
 
 """ onlye with syntastic
 function! CheckPHPCsCss()
