@@ -13,27 +13,41 @@ set cursorline
 set cursorcolumn
 filetype on
 
-colorscheme desert
-
+""colorscheme desert
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+colorscheme solarized
+
+set background=dark
 
 let mapleader = ","
 nmap <leader>g :Grep -nR <cword> .<CR>
 nmap <leader>fg :Grep -nR function.*<cword> .<CR>
 nmap <leader>l :FufFile **/<CR>
-nmap <leader>fb :FufBuffer <CR>
+nmap <leader>b :FufBuffer <CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
 ""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
 
+call togglebg#map("<leader>tb")
 
-function! TestFoo()
-endfunction
+" tab navigation like firefox
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
 
 function! RunPhpcsCss()
     let l:filename=@%
@@ -68,7 +82,7 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 set colorcolumn=120
-highlight ColorColumn ctermbg=lightgrey guibg=gray21
+"highlight ColorColumn ctermbg=lightgrey guibg=gray21
 
 """"" TagList Plugin - Ein Klassen/Funktionsbrowser
 "" for drupal run
@@ -96,19 +110,11 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_phpcs=0
 let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
+let g:syntastic_javascript_jshint_conf="~/usr/jshint.conf"
+let g:syntastic_phpcs_disable = 1
 
 
-""" onlye with syntastic
-function! CheckPHPCsCss()
-    let makeprg = "php coin/start_analyzing.php -type=css -phpcs-outputfilter=vi -path=".shellescape(expand('%'))
-    let errorformat= '%E%f | %l| ERROR | %m,%W%f | %l| WARNING | %m'
-    let loclist = SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
-    return loclist
-endfunction
-
-nmap ,sc :call CheckPHPCsCss() <cr>
- let g:user_zen_settings = { 'indentation' : '  '}
-
+let g:user_zen_settings = { 'indentation' : '  '}
 
 vmap ,cs :call Cssify()<CR>
 

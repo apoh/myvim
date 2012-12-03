@@ -22,3 +22,21 @@
 [submodule "bundle/zencoding-vim"]
 	path = bundle/zencoding-vim
 	url = http://github.com/mattn/zencoding-vim.git
+[submodule "bundle/vim-latex"]
+	path = bundle/vim-latex
+	url = https://github.com/jcf/vim-latex.git
+[submodule "DBGp-Remote-Debugger-Interface"]
+	path = DBGp-Remote-Debugger-Interface
+	url = https://github.com/vim-scripts/DBGp-Remote-Debugger-Interface.git
+[submodule "bundle/dbgp"]
+	path = bundle/dbgp
+	url = https://github.com/vim-scripts/DBGp-Remote-Debugger-Interface.git
+[submodule "bundle/vim-colors-solarized"]
+	path = bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/QFixToggle"]
+	path = bundle/QFixToggle
+	url = https://github.com/vim-scripts/QFixToggle.git
+[submodule "bundle/vim-togglelist"]
+	path = bundle/vim-togglelist
+	url = https://github.com/milkypostman/vim-togglelist.git
