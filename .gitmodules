@@ -34,9 +34,3 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/QFixToggle"]
-	path = bundle/QFixToggle
-	url = https://github.com/vim-scripts/QFixToggle.git
-[submodule "bundle/vim-togglelist"]
-	path = bundle/vim-togglelist
-	url = https://github.com/milkypostman/vim-togglelist.git
