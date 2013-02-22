@@ -34,3 +34,9 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/racket-vim"]
+	path = bundle/racket-vim
+	url = https://github.com/wlangstroth/vim-racket.git
+[submodule "bundle/rainbowp"]
+	path = bundle/rainbowp
+	url = https://github.com/kien/rainbow_parentheses.vim.git
