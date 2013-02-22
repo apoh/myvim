@@ -3,4 +3,4 @@ myvim
 
 This is my vim-configuration.
 
-just link vimrc to ~/.vimrc anf gvimrc to ~/.gvimrc
+Just link repositorie to ~/.vim, vimrc to ~/.vimrc and gvimrc to ~/.gvimrc
