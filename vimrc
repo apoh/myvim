@@ -11,6 +11,22 @@ set nu
 set guioptions=gmrLtT
 set cursorline
 set cursorcolumn
+set mouse=a
+" Reload files when they are changed by another process.
+set autoread
+augroup checktime
+    au!
+    if !has("gui_running")
+        "silent! necessary otherwise throws errors when using command
+        "line window.
+        autocmd BufEnter        * silent! checktime
+        autocmd CursorHold      * silent! checktime
+        autocmd CursorHoldI     * silent! checktime
+        "these two _may_ slow things down. Remove if they do.
+        autocmd CursorMoved     * silent! checktime
+        autocmd CursorMovedI    * silent! checktime
+    endif
+augroup END
 filetype on
 
 ""colorscheme desert
@@ -30,6 +46,8 @@ nmap <leader>b :FufBuffer <CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
+nmap <leader>vs :Gstatus<CR>
+nmap <leader>vc :Gcommit<CR>
 ""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
 
@@ -107,7 +125,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=0
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
 let g:syntastic_enable_phpcs=0
 let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
 let g:syntastic_javascript_jshint_conf="~/usr/jshint.conf"
@@ -144,7 +163,7 @@ EOF
 endfunction
 
 " Load up a 'stable' virtualenv if one exists in ~/.virtualenv
-let defaultvirtualenv = $HOME . "/Envs/env2"
+let defaultvirtualenv = $HOME . "/.envs/amf"
 
 " Only attempt to load this virtualenv if the defaultvirtualenv
 " actually exists, and we aren't running with a virtualenv active.
@@ -187,3 +206,27 @@ noremap <leader>rai :RopeAutoImport
 
 noremap <leader>nt :NERDTreeToggle<CR>
 
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['gray',  'LightSeaGreen'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
