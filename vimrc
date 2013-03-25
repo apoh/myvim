@@ -12,6 +12,8 @@ set guioptions=gmrLtT
 set cursorline
 set cursorcolumn
 set mouse=a
+syntax on
+set synmaxcol=120
 " Reload files when they are changed by another process.
 set autoread
 augroup checktime
@@ -81,9 +83,6 @@ command! PhpcsCss execute RunPhpcsCss()
 command! -nargs=1 FuncGrep :Grep -nR function.*<args> .
 command! -nargs=1 RekGrep :Grep -nR <args> .
 
-
-syntax on
-
 " <C-x-o> is magic :)
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -92,6 +91,12 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
+
+" For Ruby
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
