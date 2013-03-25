@@ -4,9 +4,6 @@
 [submodule "bundle/grep"]
 	path = bundle/grep
 	url = https://github.com/vim-scripts/grep.vim.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/vim-scripts/Syntastic.git
 [submodule "bundle/ropevim"]
 	path = bundle/ropevim
 	url = https://github.com/klen/rope-vim.git
