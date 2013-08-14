@@ -13,10 +13,12 @@ set cursorline
 set cursorcolumn
 set mouse=a
 syntax on
-set synmaxcol=120
+set synmaxcol=300
+filetype plugin indent on
 " Reload files when they are changed by another process.
 set autoread
 au FileType scala setl sw=2 sts=2 et
+au BufNewFile,BufRead *.ejs set filetype=html
 
 augroup checktime
     au!
@@ -52,6 +54,9 @@ nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
 nmap <leader>vs :Gstatus<CR>
 nmap <leader>vc :Gcommit<CR>
+nmap <leader>tf :Pytest file<CR>
+nmap <leader>tm :Pytest method<CR>
+nmap <leader>tc :Pytest class<CR>
 ""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
 
@@ -81,7 +86,7 @@ function! RunPhpcsCss()
 endfunction
 set errorformat+=\"%f\"\\,%l\\,%c\\,%t%*[a-zA-Z]\\,\"%m\"
 
-command! PhpcsCss execute RunPhpcsCss()
+"command! PhpcsCss execute RunPhpcsCss()
 command! -nargs=1 FuncGrep :Grep -nR function.*<args> .
 command! -nargs=1 RekGrep :Grep -nR <args> .
 
@@ -138,8 +143,9 @@ let g:syntastic_loc_list_height=5
 let g:syntastic_enable_phpcs=0
 let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
 let g:syntastic_javascript_jshint_conf="~/usr/jshint.conf"
-let g:syntastic_phpcs_disable = 1
+let g:loaded_syntastic_php_phpcs_checker = 0
 let g:loaded_syntastic_scala_scalac_checker = 1
+let g:syntastic_python_checkers=['pyflakes', 'pylint']
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -158,60 +164,23 @@ function! Cssify()
    normal "xp
 endfunction
 
-" Function to activate a virtualenv in the embedded interpreter for
-" omnicomplete and other things like that.
-function LoadVirtualEnv(path)
-    let activate_this = a:path . '/bin/activate_this.py'
-    if getftype(a:path) == "dir" && filereadable(activate_this)
-        python << EOF
-import vim
-activate_this = vim.eval('l:activate_this')
-execfile(activate_this, dict(__file__=activate_this))
-EOF
-    endif
-endfunction
 
-" Load up a 'stable' virtualenv if one exists in ~/.virtualenv
-let defaultvirtualenv = $HOME . "/.envs/amf"
-
-" Only attempt to load this virtualenv if the defaultvirtualenv
-" actually exists, and we aren't running with a virtualenv active.
-if has("python")
-    if empty($VIRTUAL_ENV) && getftype(defaultvirtualenv) == "dir"
-        call LoadVirtualEnv(defaultvirtualenv)
-    endif
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Rope https://bitbucket.org/agr/ropevim
-let ropevim_vim_completion = 1
-let ropevim_extended_complete = 1
-let ropevim_enable_shortcuts = 1
-let ropevim_guess_project = 1
-let g:ropevim_autoimport_modules = ["os.*","traceback","django.*", "xml.etree"]
-
-" Add the virtualenv's site-packages to vim path
-function! SetVirtualEnv()
-python << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    venv_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, venv_base_dir)
-    activate_this = os.path.join(venv_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-endfunction
-call SetVirtualEnv()
-""source $HOME/.vim/plugin/ropevim/ropevim.vim
-inoremap <C-Space> <C-R>=RopeCodeAssistInsertMode()<CR>
-
-noremap <leader>rg :RopeGotoDefinition<CR>
-noremap <leader>rr :RopeRename<CR>
-vnoremap <leader>rm :RopeExtractMethod<CR>
-noremap <leader>roi :RopeOrganizeImports<CR>
-noremap <leader>rai :RopeAutoImport
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Rope https://bitbucket.org/agr/ropevim
+""let ropevim_vim_completion = 1
+""let ropevim_extended_complete = 1
+""let ropevim_enable_shortcuts = 1
+""let ropevim_guess_project = 1
+""let g:ropevim_autoimport_modules = ["os.*","traceback","django.*", "xml.etree"]
+""
+""""source $HOME/.vim/plugin/ropevim/ropevim.vim
+""inoremap <C-Space> <C-R>=RopeCodeAssistInsertMode()<CR>
+""
+""noremap <leader>rg :RopeGotoDefinition<CR>
+""noremap <leader>rr :RopeRename<CR>
+""vnoremap <leader>rm :RopeExtractMethod<CR>
+""noremap <leader>roi :RopeOrganizeImports<CR>
+""noremap <leader>rai :RopeAutoImport
 
 noremap <leader>nt :NERDTreeToggle<CR>
 
@@ -223,8 +192,6 @@ let g:rbpt_colorpairs = [
     \ ['darkcyan',    'RoyalBlue3'],
     \ ['darkred',     'SeaGreen3'],
     \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['gray',  'LightSeaGreen'],
-    \ ['gray',        'RoyalBlue3'],
     \ ['black',       'SeaGreen3'],
     \ ['darkmagenta', 'DarkOrchid3'],
     \ ['Darkblue',    'firebrick3'],
@@ -287,3 +254,73 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+let g:pymode = 1
+let g:pymode_doc = 0
+let g:pymode_syntax = 1
+let g:pymode_motion = 1
+let g:pymode_path = 0
+let g:pymode_paths = [$PWD]
+let g:pymode_run = 0
+let g:pymode_lint = 0
+let g:pymode_rope = 1
+let g:pymode_rope_vim_completion = 1
+let g:pymode_rope_short_prefix = "<C-c>s"
+let g:pymode_rope_autocomplete_map = '<C-Space>'
+let g:pymode_rope_map_space = 1
+let g:pymode_rope_always_show_complete_menu = 0
+let g:pymode_folding = 0
+let g:pymode_options = 1
+let g:pymode_breakpoint = 0
+let g:pymode_utils_whitespaces = 1
+let g:pymode_indent = 1
+
+let g:pymode_virtualenv = 0
+let g:pymode_virtualenv_enabled = []
+" Can have multiply values "pep8,pyflakes,mcccabe"
+" Choices are pyflakes, pep8, mccabe, pylint, pep257
+let g:pymode_lint_checker = "pyflakes,pylint,pep8"
+
+" Skip errors and warnings
+" E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc
+let g:pymode_lint_ignore = "E501"
+
+" Select errors and warnings
+" E.g. "E4,W"
+let g:pymode_lint_select = ""
+
+" Run linter on the fly
+let g:pymode_lint_onfly = 0
+
+" Pylint configuration file
+" If file not found use 'pylintrc' from python-mode plugin directory
+let g:pymode_lint_config = "$HOME/.pylintrc"
+
+" Check code every save
+let g:pymode_lint_write = 1
+
+" Auto open cwindow if errors be finded
+let g:pymode_lint_cwindow = 1
+
+" Show error message if cursor placed at the error line
+let g:pymode_lint_message = 1
+
+" Auto jump on first error
+let g:pymode_lint_jump = 0
+
+" Hold cursor in current window
+" when quickfix is open
+let g:pymode_lint_hold = 0
+
+" Place error signs
+let g:pymode_lint_signs = 1
+
+" Maximum allowed mccabe complexity
+let g:pymode_lint_mccabe_complexity = 8
+
+" Minimal height of pylint error window
+let g:pymode_lint_minheight = 3
+
+" Maximal height of pylint error window
+let g:pymode_lint_maxheight = 5
+let g:pymode_lint_buffer = 0
