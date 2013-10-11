@@ -99,6 +99,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
+set completeopt-=preview
 
 " For Ruby
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -112,6 +113,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+"set colorcolumn=80
 set colorcolumn=120
 "highlight ColorColumn ctermbg=lightgrey guibg=gray21
 
@@ -145,7 +147,7 @@ let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
 let g:syntastic_javascript_jshint_conf="~/usr/jshint.conf"
 let g:loaded_syntastic_php_phpcs_checker = 0
 let g:loaded_syntastic_scala_scalac_checker = 1
-let g:syntastic_python_checkers=['pyflakes', 'pylint']
+let g:syntastic_python_checkers=['pyflakes', 'pylint', 'pep8']
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -256,7 +258,6 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 let g:pymode = 1
-let g:pymode_doc = 0
 let g:pymode_syntax = 1
 let g:pymode_motion = 1
 let g:pymode_path = 0
@@ -279,7 +280,7 @@ let g:pymode_virtualenv = 0
 let g:pymode_virtualenv_enabled = []
 " Can have multiply values "pep8,pyflakes,mcccabe"
 " Choices are pyflakes, pep8, mccabe, pylint, pep257
-let g:pymode_lint_checker = "pyflakes,pylint,pep8"
+let g:pymode_lint_checker = "pyflakes, pylint, pyflakes, pep8"
 
 " Skip errors and warnings
 " E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc
@@ -322,5 +323,7 @@ let g:pymode_lint_mccabe_complexity = 8
 let g:pymode_lint_minheight = 3
 
 " Maximal height of pylint error window
-let g:pymode_lint_maxheight = 5
+let g:pymode_lint_maxheight = 3
 let g:pymode_lint_buffer = 0
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
