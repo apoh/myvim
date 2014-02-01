@@ -51,8 +51,6 @@ set background=dark
 let mapleader = ","
 nmap <leader>g :Grep --exclude=*{pyc,xml,pylint.txt} --exclude-dir={doc,.ropeproject,.git,backend.egg-info} -nR <cword> .<CR>
 nmap <leader>fg :Grep -nR function.*<cword> .<CR>
-nmap <leader>l :FufFile **/<CR>
-nmap <leader>b :FufBuffer <CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
