@@ -56,9 +56,11 @@ nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
 nmap <leader>vs :Gstatus<CR>
 nmap <leader>vc :Gcommit<CR>
-nmap <leader>tf :Pytest file<CR>
-nmap <leader>tm :Pytest method<CR>
-nmap <leader>tc :Pytest class<CR>
+nmap <leader>ptf :Pytest file<CR>
+nmap <leader>ptm :Pytest method<CR>
+nmap <leader>ptc :Pytest class<CR>
+nmap <leader>u :GundoToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
 ""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
 
@@ -79,6 +81,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 
 command! -nargs=1 FuncGrep :Grep -nR function.*<args> .
 command! -nargs=1 RekGrep :Grep -nR <args> .
+map <C-n> :NERDTreeToggle<CR>
 
 " <C-x-o> is magic :)
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -118,10 +121,8 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
 let g:syntastic_enable_phpcs=0
-let g:syntastic_javascript_jsl_conf="~/usr/jslint.conf"
-let g:syntastic_javascript_jshint_conf="~/usr/jshint.conf"
-let g:loaded_syntastic_php_phpcs_checker = 0
-let g:loaded_syntastic_scala_scalac_checker = 1
+let g:loaded_syntastic_php_phpmd_checker=0
+let g:loaded_syntastic_scala_scalac_checker=1
 let g:syntastic_python_checkers=['pyflakes', 'pylint', 'pep8']
 
 
@@ -192,9 +193,9 @@ let g:pymode_lint_ignore = "E501"
 " Pylint configuration file
 " If file not found use 'pylintrc' from python-mode plugin directory
 let g:pymode_lint_config = "$HOME/.pylintrc"
-let g:pymode_rope_goto_definition_bind = '<leader>rg'
+""let g:pymode_rope_goto_definition_bind = '<leader>rg'
 let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_rope_autoimport_bind = '<leader>rai'
+""let g:pymode_rope_autoimport_bind = '<leader>rai'
 
 let g:airline_theme='laederon'
 let g:airline#extensions#syntastic#enabled = 1
