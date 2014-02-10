@@ -192,13 +192,15 @@ let g:pymode_lint_ignore = "E501"
 
 " Pylint configuration file
 " If file not found use 'pylintrc' from python-mode plugin directory
-let g:pymode_lint_config = "$HOME/.pylintrc"
+"let g:pymode_lint_config = "$HOME/.pylintrc"
 ""let g:pymode_rope_goto_definition_bind = '<leader>rg'
 let g:pymode_rope_goto_definition_cmd = 'e'
 ""let g:pymode_rope_autoimport_bind = '<leader>rai'
 
 let g:airline_theme='laederon'
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 set laststatus=2
 let g:ctrlp_custom_ignore = {
