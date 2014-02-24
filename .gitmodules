@@ -106,3 +106,12 @@
 [submodule "bundle/vim.misc"]
 	path = bundle/vim.misc
 	url = https://github.com/xolox/vim-misc.git
+[submodule "bundle/DBGPavim"]
+	path = bundle/DBGPavim
+	url = https://github.com/brookhong/DBGPavim.git
+[submodule "bundle/vdebug"]
+	path = bundle/vdebug
+	url = https://github.com/joonty/vdebug.git
+[submodule "bundle/tern_for_vim"]
+	path = bundle/tern_for_vim
+	url = https://github.com/marijnh/tern_for_vim.git

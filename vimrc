@@ -21,6 +21,7 @@ set cursorcolumn
 set mouse=a
 syntax on
 set synmaxcol=300
+set tags=./.tags;,~/.vimtags
 filetype plugin indent on
 " Reload files when they are changed by another process.
 set autoread
