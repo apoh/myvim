@@ -1,9 +1,37 @@
-filetype off
-call pathogen#infect()
-call pathogen#incubate()
-syntax on
-filetype plugin indent on
-call pathogen#helptags()
+""filetype off
+""call pathogen#infect()
+""call pathogen#incubate()
+""syntax on
+""filetype plugin indent on
+""call pathogen#helptags()
+
+Bundle kien/ctrlp.vim
+Bundle tpope/vim-fugitive
+Bundle vim-scripts/grep.vim
+Bundle sjl/gundo.vim
+Bundle vim-scripts/Mark--Karkat
+Bundle Shougo/neocomplcache
+Bundle scrooloose/nerdtree
+Bundle vim-scripts/py-coverage
+Bundle alfredodeza/pytest.vim
+Bundle klen/python-mode
+Bundle wlangstroth/vim-racket
+Bundle kien/rainbow_parentheses.vim
+Bundle scrooloose/syntastic
+Bundle majutsushi/tagbar
+Bundle vim-php/tagbar-phpctags.vim
+Bundle marijnh/tern_for_vim
+Bundle joonty/vdebug
+Bundle bling/vim-airline
+Bundle altercation/vim-colors-solarized
+Bundle Lokaltog/vim-easymotion
+Bundle xolox/vim-easytags
+Bundle airblade/vim-gitgutter
+Bundle jcf/vim-latex
+Bundle vim-ruby/vim-ruby
+Bundle derekwyatt/vim-scala
+Bundle xolox/vim-misc
+Bundle Shougo/vimshell.vim
 
 set autoindent
 set tabstop=4
@@ -181,6 +209,7 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 let g:pymode_lint = 0
+let g:pymode_lint_write = 0
 let g:pymode_rope = 1
 let g:pymode_folding = 0
 " Can have multiply values "pep8,pyflakes,mcccabe"
@@ -208,3 +237,8 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svndoc|.ropeproject|backend.egg-info|node_modules)$',
   \ 'file': '\v\.(pyc)$',
   \ }
+
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '__pycache__$[[dir]]', '\.egg']
+
+let g:easytags_dynamic_files = 1
+let g:easytags_events = ['BufWritePost']
