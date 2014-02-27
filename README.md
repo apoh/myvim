@@ -14,7 +14,7 @@ This is my vim-configuration
 
 3. checkout vundle
 
-    `$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+    `$ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim`
 
 4. Link repositorie to ~/.vim, vimrc to ~/.vimrc and gvimrc to ~/.gvimrc
 
@@ -23,4 +23,5 @@ This is my vim-configuration
 
 5. Install Bundles
 
-    `$ vim +BundleInstall +qall`
+    Launch `vim` and run `NeoBundleInstall`
+

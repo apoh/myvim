@@ -1,40 +1,44 @@
-set nocompatible " be iMproved, required
-filetype off " required
+if has('vim_starting')
+  set nocompatible               " Be iMproved
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/grep.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'vim-scripts/Mark--Karkat'
-Bundle 'Shougo/neocomplcache'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/py-coverage'
-Bundle 'alfredodeza/pytest.vim'
-Bundle 'klen/python-mode'
-Bundle 'wlangstroth/vim-racket'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'vim-php/tagbar-phpctags.vim'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'joonty/vdebug'
-Bundle 'bling/vim-airline'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'xolox/vim-easytags'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jcf/vim-latex'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'xolox/vim-misc'
-Bundle 'Shougo/vimshell.vim'
+" Required:
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'vim-scripts/grep.vim'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'vim-scripts/Mark--Karkat'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'vim-scripts/py-coverage'
+NeoBundle 'alfredodeza/pytest.vim'
+NeoBundle 'klen/python-mode'
+NeoBundle 'wlangstroth/vim-racket'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'vim-php/tagbar-phpctags.vim'
+NeoBundle 'marijnh/tern_for_vim'
+NeoBundle 'joonty/vdebug'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'jcf/vim-latex'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'Shougo/vimshell.vim'
 
 filetype plugin indent on
+
+NeoBundleCheck
 
 set autoindent
 set tabstop=4
