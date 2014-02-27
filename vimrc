@@ -1,37 +1,40 @@
-""filetype off
-""call pathogen#infect()
-""call pathogen#incubate()
-""syntax on
-""filetype plugin indent on
-""call pathogen#helptags()
+set nocompatible " be iMproved, required
+filetype off " required
 
-Bundle kien/ctrlp.vim
-Bundle tpope/vim-fugitive
-Bundle vim-scripts/grep.vim
-Bundle sjl/gundo.vim
-Bundle vim-scripts/Mark--Karkat
-Bundle Shougo/neocomplcache
-Bundle scrooloose/nerdtree
-Bundle vim-scripts/py-coverage
-Bundle alfredodeza/pytest.vim
-Bundle klen/python-mode
-Bundle wlangstroth/vim-racket
-Bundle kien/rainbow_parentheses.vim
-Bundle scrooloose/syntastic
-Bundle majutsushi/tagbar
-Bundle vim-php/tagbar-phpctags.vim
-Bundle marijnh/tern_for_vim
-Bundle joonty/vdebug
-Bundle bling/vim-airline
-Bundle altercation/vim-colors-solarized
-Bundle Lokaltog/vim-easymotion
-Bundle xolox/vim-easytags
-Bundle airblade/vim-gitgutter
-Bundle jcf/vim-latex
-Bundle vim-ruby/vim-ruby
-Bundle derekwyatt/vim-scala
-Bundle xolox/vim-misc
-Bundle Shougo/vimshell.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/grep.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'vim-scripts/Mark--Karkat'
+Bundle 'Shougo/neocomplcache'
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-scripts/py-coverage'
+Bundle 'alfredodeza/pytest.vim'
+Bundle 'klen/python-mode'
+Bundle 'wlangstroth/vim-racket'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'vim-php/tagbar-phpctags.vim'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'joonty/vdebug'
+Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'xolox/vim-easytags'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'jcf/vim-latex'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'xolox/vim-misc'
+Bundle 'Shougo/vimshell.vim'
+
+filetype plugin indent on
 
 set autoindent
 set tabstop=4
@@ -50,7 +53,6 @@ set mouse=a
 syntax on
 set synmaxcol=300
 set tags=./.tags;,~/.vimtags
-filetype plugin indent on
 " Reload files when they are changed by another process.
 set autoread
 au FileType scala setl sw=2 sts=2 et
