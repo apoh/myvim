@@ -84,8 +84,9 @@ colorscheme solarized
 set background=dark
 
 let mapleader = ","
-nmap <leader>g :Grep --exclude=*{pyc,xml,pylint.txt} --exclude-dir={doc,.ropeproject,.git,backend.egg-info} -nR <cword> .<CR>
-nmap <leader>fg :Grep -nR function.*<cword> .<CR>
+let Grep_Default_Options = '-nIr --exclude=*{pyc,xml,pylint.txt} --exclude-dir={doc,.ropeproject,.git,backend.egg-info,__pycache__}'
+nmap <leader>g :Grep <cword> .<CR>
+nmap <leader>fg :Grep function.*<cword> .<CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
@@ -114,8 +115,8 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
-command! -nargs=1 FuncGrep :Grep -nR function.*<args> .
-command! -nargs=1 RekGrep :Grep -nR <args> .
+command! -nargs=1 FuncGrep :Grep function.*<args> .
+command! -nargs=1 RekGrep :Grep <args> *
 map <C-n> :NERDTreeToggle<CR>
 
 " <C-x-o> is magic :)
