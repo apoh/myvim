@@ -13,7 +13,6 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'vim-scripts/Mark--Karkat'
-NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/py-coverage'
 NeoBundle 'alfredodeza/pytest.vim'
@@ -24,17 +23,20 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-php/tagbar-phpctags.vim'
 NeoBundle 'marijnh/tern_for_vim' , {'build': {'unix': 'npm install'}}
-NeoBundle 'joonty/vdebug'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'xolox/vim-easytags'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'jcf/vim-latex'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'davidhalter/jedi-vim'
 
 filetype plugin indent on
 
@@ -57,7 +59,6 @@ set mouse=a
 syntax on
 set synmaxcol=300
 set tags=./.tags;,~/.vimtags
-" Reload files when they are changed by another process.
 set autoread
 au FileType scala setl sw=2 sts=2 et
 au BufNewFile,BufRead *.ejs set filetype=html
@@ -84,7 +85,7 @@ colorscheme solarized
 set background=dark
 
 let mapleader = ","
-let Grep_Default_Options = '-nIr --exclude=*{pyc,xml,pylint.txt} --exclude-dir={doc,.ropeproject,.git,backend.egg-info,__pycache__}'
+let Grep_Default_Options = '-nIr --exclude=\*{pyc,xml,pylint.txt,coveragerc,.tags} --exclude-dir={doc,.ropeproject,.git,\*.egg-info,__pycache__,\*.egg,node_modules,vendor,build}'
 nmap <leader>g :Grep <cword> .<CR>
 nmap <leader>fg :Grep function.*<cword> .<CR>
 nmap <leader>vd :Gvdiff <CR>
@@ -99,6 +100,7 @@ nmap <leader>u :GundoToggle<CR>
 nmap <leader>t :TagbarToggle<CR>
 ""nmap <leader>ec :call SwitchPHPCss() <cr>
 nmap <leader>cw :% s/\s\+$//gc<cr>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 call togglebg#map("<leader>tb")
 
@@ -114,6 +116,8 @@ nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
+
+nnoremap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 command! -nargs=1 FuncGrep :Grep function.*<args> .
 command! -nargs=1 RekGrep :Grep <args> *
@@ -159,7 +163,7 @@ let g:syntastic_loc_list_height=5
 let g:syntastic_enable_phpcs=0
 let g:loaded_syntastic_php_phpmd_checker=0
 let g:loaded_syntastic_scala_scalac_checker=1
-let g:syntastic_python_checkers=['pyflakes', 'pylint', 'pep8']
+let g:syntastic_python_checkers=['pyflakes', 'pylint', 'pep8', 'flake8']
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -169,55 +173,9 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"neocomplettion stuff
-" Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
-let g:acp_enableAtStartup = 0
-" Launches neocomplcache automatically on vim startup.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Define file-type dependent dictionaries.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
-
-" Define keyword, for minor languages
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-"" <CR>: close popup and save indent.
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
 let g:pymode_lint = 0
 let g:pymode_lint_write = 0
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_folding = 0
 " Can have multiply values "pep8,pyflakes,mcccabe"
 " Choices are pyflakes, pep8, mccabe, pylint, pep257
@@ -240,15 +198,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 set laststatus=2
+
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svndoc|.ropeproject|backend.egg-info|node_modules)$',
-  \ 'file': '\v\.(pyc)$',
+  \ 'dir':  '\v[\/](.git|.hg|.svndoc|.ropeproject|backend.egg-info|node_modules|coverage|vendor|build)$',
+  \ 'file': '\v(.pyc|TEST.*xml)$',
   \ }
 
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '__pycache__$[[dir]]', '\.egg']
-
-let g:easytags_dynamic_files = 1
-let g:easytags_events = ['BufWritePost']
 
 "  Parentheses colours using Solarized
 let g:rbpt_colorpairs = [
@@ -261,3 +217,9 @@ let g:rbpt_colorpairs = [
   \ [ '6',  '#2aa198'],
   \ [ '4',  '#268bd2'],
   \ ]
+"
+let g:solarized_termcolors=256
+set t_Co=256
+"
+"" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
