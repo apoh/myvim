@@ -37,6 +37,7 @@ NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'dirkwallenstein/vim-localcomplete'
 
 filetype plugin indent on
 
@@ -107,6 +108,8 @@ call togglebg#map("<leader>tb")
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-PageUp> :bnext<CR>
+nnoremap <C-PageDown>   :bprevious<CR>
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
@@ -163,7 +166,8 @@ let g:syntastic_loc_list_height=5
 let g:syntastic_enable_phpcs=0
 let g:loaded_syntastic_php_phpmd_checker=0
 let g:loaded_syntastic_scala_scalac_checker=1
-let g:syntastic_python_checkers=['pyflakes', 'pylint', 'pep8', 'flake8']
+let g:syntastic_python_checkers=['frosted', 'pep8', 'pylint']
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -191,6 +195,10 @@ let g:pymode_lint_ignore = "E501"
 ""let g:pymode_rope_goto_definition_bind = '<leader>rg'
 let g:pymode_rope_goto_definition_cmd = 'e'
 ""let g:pymode_rope_autoimport_bind = '<leader>rai'
+
+let g:jedi#goto_assignments_command = 'leader<rg>'
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#popup_on_dot = 0
 
 let g:airline_theme='laederon'
 let g:airline#extensions#syntastic#enabled = 1
