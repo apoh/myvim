@@ -38,6 +38,7 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'dirkwallenstein/vim-localcomplete'
+NeoBundle 'jiangmiao/auto-pairs'
 
 filetype plugin indent on
 
@@ -196,6 +197,7 @@ let g:pymode_lint_ignore = "E501"
 let g:pymode_rope_goto_definition_cmd = 'e'
 ""let g:pymode_rope_autoimport_bind = '<leader>rai'
 
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:jedi#goto_assignments_command = 'leader<rg>'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
