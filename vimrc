@@ -35,7 +35,7 @@ NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'Valloric/YouCompleteMe', {'build' : {'unix' : './install.sh --clang-completer'}}
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'dirkwallenstein/vim-localcomplete'
 NeoBundle 'jiangmiao/auto-pairs'
