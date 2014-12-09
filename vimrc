@@ -38,7 +38,17 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'Valloric/YouCompleteMe', {'build' : {'unix' : './install.sh --clang-completer'}}
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'dirkwallenstein/vim-localcomplete'
-NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'claco/jasmine.vim'
+NeoBundle 'emgram769/vim-multiuser'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'othree/javascript-libraries-syntax.vim'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'burnettk/vim-angular'
+NeoBundle 'matthewsimo/angular-vim-snippets'
+NeoBundle 'rking/ag.vim'
 
 filetype plugin indent on
 
@@ -58,11 +68,15 @@ set guioptions=gmrLtT
 set cursorline
 set cursorcolumn
 set mouse=a
-syntax on
+syntax enable
 set synmaxcol=300
+set textwidth=120
 set tags=./.tags;,~/.vimtags
 set autoread
 au FileType scala setl sw=2 sts=2 et
+autocmd! BufNewFile,BufRead *.raml set filetype=yaml
+au FileType yaml setl sw=2 sts=2 et
+
 au BufNewFile,BufRead *.ejs set filetype=html
 
 augroup checktime
@@ -81,15 +95,14 @@ augroup END
 filetype on
 
 ""colorscheme desert
-
+set t_Co=16
+set background=dark
 colorscheme solarized
 
-set background=dark
-
 let mapleader = ","
-let Grep_Default_Options = '-nIr --exclude=\*{pyc,xml,pylint.txt,coveragerc,.tags} --exclude-dir={doc,.ropeproject,.git,\*.egg-info,__pycache__,\*.egg,node_modules,vendor,build}'
-nmap <leader>g :Grep <cword> .<CR>
-nmap <leader>fg :Grep function.*<cword> .<CR>
+let Grep_Default_Options = '-nIr --exclude=\*{pyc,xml,pylint.txt,coveragerc,.tags} --exclude-dir={doc,.ropeproject,.git,\*.egg-info,__pycache__,\*.egg,node_modules,vendor,build,htmlcov}'
+nmap <leader>g :Ag <cword> .<CR>
+nmap <leader>fg :Ag function.*<cword> .<CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
@@ -164,8 +177,8 @@ endif
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
-let g:syntastic_enable_phpcs=0
-let g:loaded_syntastic_php_phpmd_checker=0
+let g:loaded_syntastic_php_phpmd_checker=1
+let g:loaded_syntastic_php_phpcs_checker = 1
 let g:loaded_syntastic_scala_scalac_checker=1
 let g:syntastic_python_checkers=['frosted', 'pep8', 'pylint']
 let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
@@ -196,6 +209,7 @@ let g:pymode_lint_ignore = "E501"
 ""let g:pymode_rope_goto_definition_bind = '<leader>rg'
 let g:pymode_rope_goto_definition_cmd = 'e'
 ""let g:pymode_rope_autoimport_bind = '<leader>rai'
+let g:pymode_options_colorcolumn = 0
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:jedi#goto_assignments_command = 'leader<rg>'
@@ -210,7 +224,7 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](.git|.hg|.svndoc|.ropeproject|backend.egg-info|node_modules|coverage|vendor|build)$',
+  \ 'dir':  '\v[\/](.git|.hg|.svndoc|.ropeproject|backend.egg-info|node_modules|coverage|vendor|build|htmlcov)$',
   \ 'file': '\v(.pyc|TEST.*xml)$',
   \ }
 
@@ -227,9 +241,14 @@ let g:rbpt_colorpairs = [
   \ [ '6',  '#2aa198'],
   \ [ '4',  '#268bd2'],
   \ ]
-"
-let g:solarized_termcolors=256
-set t_Co=256
-"
+
+""" set t_Co=256
+
 "" Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
+
+let g:used_javascript_libs = 'underscore,angularjs,angularui,jasmine'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "translate", "tracking", "trimming empty"]
+
+let g:angular_source_directory = 'src'
