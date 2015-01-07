@@ -252,3 +252,6 @@ let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "translate", "tracking", "trimming empty"]
 
 let g:angular_source_directory = 'src'
+map <Space> <Plug>(easymotion-prefix)
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
