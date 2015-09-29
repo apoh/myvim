@@ -49,6 +49,10 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'burnettk/vim-angular'
 NeoBundle 'matthewsimo/angular-vim-snippets'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'morhetz/gruvbox'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'miyakogi/conoline.vim'
 
 filetype plugin indent on
 
@@ -95,14 +99,14 @@ augroup END
 filetype on
 
 ""colorscheme desert
-set t_Co=16
+set t_Co=256
 set background=dark
 colorscheme solarized
 
 let mapleader = ","
 let Grep_Default_Options = '-nIr --exclude=\*{pyc,xml,pylint.txt,coveragerc,.tags} --exclude-dir={doc,.ropeproject,.git,\*.egg-info,__pycache__,\*.egg,node_modules,vendor,build,htmlcov}'
-nmap <leader>g :Ag <cword> .<CR>
-nmap <leader>fg :Ag function.*<cword> .<CR>
+nmap <leader>g :Ag! <cword> .<CR>
+nmap <leader>fg :Ag! function.*<cword> .<CR>
 nmap <leader>vd :Gvdiff <CR>
 nmap <leader>vb :Gblame <CR>
 nmap <leader>vl :Glog<CR>
@@ -128,6 +132,8 @@ nnoremap <C-t>     :tabnew<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
+
+imap jk <Esc>
 
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
@@ -255,3 +261,5 @@ let g:angular_source_directory = 'src'
 map <Space> <Plug>(easymotion-prefix)
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
+
+let g:conoline_use_colorscheme_default_normal=1
