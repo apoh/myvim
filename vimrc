@@ -6,7 +6,10 @@ if has('vim_starting')
 endif
 
 " Required:
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+filetype plugin indent on
 
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -22,7 +25,6 @@ NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-php/tagbar-phpctags.vim'
-NeoBundle 'marijnh/tern_for_vim' , {'build': {'unix': 'npm install'}}
 NeoBundle 'bling/vim-airline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -39,7 +41,6 @@ NeoBundle 'Valloric/YouCompleteMe', {'build' : {'unix' : './install.sh --clang-c
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'dirkwallenstein/vim-localcomplete'
 NeoBundle 'claco/jasmine.vim'
-NeoBundle 'emgram769/vim-multiuser'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'pangloss/vim-javascript'
@@ -53,6 +54,7 @@ NeoBundle 'rking/ag.vim'
 filetype plugin indent on
 
 NeoBundleCheck
+call neobundle#end()
 
 set autoindent
 set tabstop=4
@@ -249,9 +251,11 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 
 let g:used_javascript_libs = 'underscore,angularjs,angularui,jasmine'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
+
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "translate", "tracking", "trimming empty"]
 
 let g:angular_source_directory = 'src'
+
 map <Space> <Plug>(easymotion-prefix)
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
