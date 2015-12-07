@@ -112,6 +112,8 @@ nmap <leader>vs :Gstatus<CR>
 nmap <leader>vc :Gcommit<CR>
 nmap <leader>ptf :Pytest file<CR>
 nmap <leader>ptm :Pytest method<CR>
+nmap <leader>plq :let g:pymode_lint_cwindow = 1<CR>
+nmap <leader>pln :let g:pymode_lint_cwindow = 0<CR>
 nmap <leader>ptc :Pytest class<CR>
 nmap <leader>u :GundoToggle<CR>
 nmap <leader>t :TagbarToggle<CR>
@@ -182,8 +184,7 @@ let g:syntastic_loc_list_height=5
 let g:loaded_syntastic_php_phpmd_checker=1
 let g:loaded_syntastic_php_phpcs_checker = 1
 let g:loaded_syntastic_scala_scalac_checker=1
-let g:syntastic_python_checkers=['frosted', 'pep8', 'pylint']
-let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -193,13 +194,12 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:pymode_lint = 0
+let g:pymode_lint = 1
 let g:pymode_lint_write = 0
 let g:pymode_rope = 0
 let g:pymode_folding = 0
-" Can have multiply values "pep8,pyflakes,mcccabe"
-" Choices are pyflakes, pep8, mccabe, pylint, pep257
-let g:pymode_lint_checker = "pyflakes, pylint, pep8"
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 
 " Skip errors and warnings
 " E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc
