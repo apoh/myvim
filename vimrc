@@ -78,6 +78,7 @@ set autoread
 au FileType scala setl sw=2 sts=2 et
 autocmd! BufNewFile,BufRead *.raml set filetype=yaml
 au FileType yaml setl sw=2 sts=2 et
+au FileType javascript setl sw=2 sts=2 et
 
 au BufNewFile,BufRead *.ejs set filetype=html
 
@@ -132,6 +133,7 @@ nnoremap <C-t>     :tabnew<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
+inoremap <C-ß>     <Esc>:CtrlPBuffer<CR>
 
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
@@ -179,12 +181,14 @@ if has("autocmd")
 endif
 
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_loc_list_height=5
 let g:loaded_syntastic_php_phpmd_checker=1
 let g:loaded_syntastic_php_phpcs_checker = 1
 let g:loaded_syntastic_scala_scalac_checker=1
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+let g:syntastic_javascript_checkers=['jscs', 'jshint']
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
