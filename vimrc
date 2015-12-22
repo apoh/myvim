@@ -20,7 +20,6 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/py-coverage'
 NeoBundle 'alfredodeza/pytest.vim'
 NeoBundle 'klen/python-mode'
-NeoBundle 'wlangstroth/vim-racket'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
@@ -98,7 +97,6 @@ augroup END
 filetype on
 
 ""colorscheme desert
-set t_Co=16
 set background=dark
 colorscheme solarized
 
@@ -247,8 +245,6 @@ let g:rbpt_colorpairs = [
   \ [ '6',  '#2aa198'],
   \ [ '4',  '#268bd2'],
   \ ]
-
-""" set t_Co=256
 
 "" Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
