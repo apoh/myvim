@@ -44,7 +44,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'Raimondi/delimitMate'
+" NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'burnettk/vim-angular'
 NeoBundle 'matthewsimo/angular-vim-snippets'
@@ -197,7 +197,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:pymode_lint = 1
-let g:pymode_lint_write = 0
+let g:pymode_lint_write = 1
 let g:pymode_rope = 0
 let g:pymode_folding = 0
 let g:pymode_lint_cwindow = 0
@@ -259,3 +259,5 @@ let g:angular_source_directory = 'src'
 map <Space> <Plug>(easymotion-prefix)
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
+
+set backspace=indent,eol,start
