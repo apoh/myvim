@@ -25,6 +25,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-php/tagbar-phpctags.vim'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'airblade/vim-gitgutter'
@@ -49,6 +50,8 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'burnettk/vim-angular'
 NeoBundle 'matthewsimo/angular-vim-snippets'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'junkblocker/patchreview-vim'
+NeoBundle 'codegram/vim-codereview'
 
 filetype plugin indent on
 
@@ -97,6 +100,7 @@ augroup END
 filetype on
 
 ""colorscheme desert
+set t_Co=256
 set background=dark
 colorscheme solarized
 
