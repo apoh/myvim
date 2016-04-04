@@ -6,7 +6,10 @@ if has('vim_starting')
 endif
 
 " Required:
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+filetype plugin indent on
 
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -17,13 +20,12 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/py-coverage'
 NeoBundle 'alfredodeza/pytest.vim'
 NeoBundle 'klen/python-mode'
-NeoBundle 'wlangstroth/vim-racket'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-php/tagbar-phpctags.vim'
-NeoBundle 'marijnh/tern_for_vim' , {'build': {'unix': 'npm install'}}
 NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'airblade/vim-gitgutter'
@@ -39,12 +41,11 @@ NeoBundle 'Valloric/YouCompleteMe', {'build' : {'unix' : './install.sh --clang-c
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'dirkwallenstein/vim-localcomplete'
 NeoBundle 'claco/jasmine.vim'
-NeoBundle 'emgram769/vim-multiuser'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'Raimondi/delimitMate'
+" NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'burnettk/vim-angular'
 NeoBundle 'matthewsimo/angular-vim-snippets'
@@ -57,6 +58,7 @@ NeoBundle 'miyakogi/conoline.vim'
 filetype plugin indent on
 
 NeoBundleCheck
+call neobundle#end()
 
 set autoindent
 set tabstop=4
@@ -80,6 +82,7 @@ set autoread
 au FileType scala setl sw=2 sts=2 et
 autocmd! BufNewFile,BufRead *.raml set filetype=yaml
 au FileType yaml setl sw=2 sts=2 et
+au FileType javascript setl sw=2 sts=2 et
 
 au BufNewFile,BufRead *.ejs set filetype=html
 
@@ -114,6 +117,8 @@ nmap <leader>vs :Gstatus<CR>
 nmap <leader>vc :Gcommit<CR>
 nmap <leader>ptf :Pytest file<CR>
 nmap <leader>ptm :Pytest method<CR>
+nmap <leader>plq :let g:pymode_lint_cwindow = 1<CR>
+nmap <leader>pln :let g:pymode_lint_cwindow = 0<CR>
 nmap <leader>ptc :Pytest class<CR>
 nmap <leader>u :GundoToggle<CR>
 nmap <leader>t :TagbarToggle<CR>
@@ -132,6 +137,7 @@ nnoremap <C-t>     :tabnew<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
+inoremap <C-ß>     <Esc>:CtrlPBuffer<CR>
 
 imap jk <Esc>
 
@@ -181,13 +187,14 @@ if has("autocmd")
 endif
 
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_loc_list_height=5
 let g:loaded_syntastic_php_phpmd_checker=1
 let g:loaded_syntastic_php_phpcs_checker = 1
 let g:loaded_syntastic_scala_scalac_checker=1
-let g:syntastic_python_checkers=['frosted', 'pep8', 'pylint']
-let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+let g:syntastic_javascript_checkers=['jscs', 'jshint']
 
 
 let g:user_zen_settings = { 'indentation' : '  '}
@@ -197,13 +204,12 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:pymode_lint = 0
-let g:pymode_lint_write = 0
+let g:pymode_lint = 1
+let g:pymode_lint_write = 1
 let g:pymode_rope = 0
 let g:pymode_folding = 0
-" Can have multiply values "pep8,pyflakes,mcccabe"
-" Choices are pyflakes, pep8, mccabe, pylint, pep257
-let g:pymode_lint_checker = "pyflakes, pylint, pep8"
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 
 " Skip errors and warnings
 " E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc
@@ -248,16 +254,16 @@ let g:rbpt_colorpairs = [
   \ [ '4',  '#268bd2'],
   \ ]
 
-""" set t_Co=256
-
 "" Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 let g:used_javascript_libs = 'underscore,angularjs,angularui,jasmine'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
+
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", "translate", "tracking", "trimming empty"]
 
 let g:angular_source_directory = 'src'
+
 map <Space> <Plug>(easymotion-prefix)
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
