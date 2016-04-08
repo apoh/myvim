@@ -269,3 +269,4 @@ hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
 
 let g:conoline_use_colorscheme_default_normal=1
+let g:EclimCompletionMethod = 'omnifunc'
